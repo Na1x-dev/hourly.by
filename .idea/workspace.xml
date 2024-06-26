@@ -5,16 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe766a80-907b-4060-a5d8-3d163202ba8e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data.JSON" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elem.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hourly/hourly_api/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hourly/hourly_api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hourly-front/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/hourly-front/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/hourly-front/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/hourly-front/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hourly-front/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
