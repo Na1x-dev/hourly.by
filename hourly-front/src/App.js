@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import ApartmentList from './ApartmentList';
+import ApartmentSearchForm from './SearchForm';
 import './App.css';
 
 const API_URL = "http://127.0.0.1:8000/api/apartment/"
@@ -51,6 +52,7 @@ function App() {
   return (
       <div className='app'>
           {/* <AddToDo createToDo={createToDo} getToDos={getToDos}></AddToDo> */}
+          <ApartmentSearchForm></ApartmentSearchForm>
           <ApartmentList  apartments={apartments}></ApartmentList>  
       </div>
   );
