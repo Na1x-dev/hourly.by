@@ -56,7 +56,7 @@ const ApartmentSearchForm = ({ searchApartments }) => {
                     />
                 </div>
                 <div className="input-box">
-                    <label className="font label">Number of Adults</label>
+                    <label className="font label">Adults</label>
                     <input
                         required
                         className="input font adults-input"
@@ -66,7 +66,7 @@ const ApartmentSearchForm = ({ searchApartments }) => {
                         min="1"
                     /></div>
                 <div className="input-box">
-                    <label className="font label">Number of Children</label>
+                    <label className="font label">Children</label>
                     <input
                         required
                         className="input font children-input"

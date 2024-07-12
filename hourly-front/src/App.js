@@ -20,6 +20,20 @@ function App() {
       getApartments()
   }, [])
 
+
+  return (
+      <div className='app'>
+          {/* <AddToDo createToDo={createToDo} getToDos={getToDos}></AddToDo> */}
+          <ApartmentSearchForm></ApartmentSearchForm>
+          {/* <ApartmentList  apartments={apartments}></ApartmentList>   */}
+      </div>
+  );
+}
+
+export default App;
+
+
+
   // const createToDo = (newTodo) => {
 
 
@@ -48,14 +62,3 @@ function App() {
   //     }))
   //     axios.put(API_URL + todo.id.toString() + '/', todo)
   // }
-
-  return (
-      <div className='app'>
-          {/* <AddToDo createToDo={createToDo} getToDos={getToDos}></AddToDo> */}
-          <ApartmentSearchForm></ApartmentSearchForm>
-          <ApartmentList  apartments={apartments}></ApartmentList>  
-      </div>
-  );
-}
-
-export default App;
