@@ -45,9 +45,14 @@ def parse_card_data(city_item):
             card_dict['title'] = ' '.join(title_element.text.strip().split())
 
         card_dict['location'] = ''
-        address_element = card.find('span', class_='card-content__property-text')
+        
+        address_element_list  = card.find_all('a', class_='card-content__property')
+        address_element_spans = address_element_list[len(address_element_list)-1].find_all('span')
+        address_element = address_element_spans[len(address_element_spans)-1]
         if address_element:
             card_dict['location'] = ' '.join(address_element.text.strip().split())
+
+        card_dict['city'] = card_dict['location'].split(',')[0]
 
         card_dict['size'] = ''
         size_element = card.find('p', class_='card-content__facility')
@@ -79,7 +84,7 @@ def parse_card_data(city_item):
 def put_data_into_table(conn, data):
     cur = conn.cursor()
     cur.execute(
-        f"INSERT INTO {DB_TABLE} (room_type, title, location, size, rating, price_per_day, image_url) VALUES (%(room_type)s, %(title)s, %(location)s, %(size)s, %(rating)s, %(price_per_day)s,  %(image_url)s)",
+        f"INSERT INTO {DB_TABLE} (room_type, title, location, city, size, rating, price_per_day, image_url) VALUES (%(room_type)s, %(title)s, %(location)s, %(city)s, %(size)s, %(rating)s, %(price_per_day)s,  %(image_url)s)",
         data)
     conn.commit()
 
