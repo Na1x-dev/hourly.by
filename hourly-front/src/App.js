@@ -8,17 +8,17 @@ const API_URL = "http://127.0.0.1:8000/api/apartment/"
 
 
 function App() {
-  const [apartments, setApartments] = useState([])
-  const getApartments = async () => {
-      const response = await axios.get(API_URL)
-      const apartments = response.data
-      // const sorted_todos = todos.sort((a, b) => b.id - a.id);
-      setApartments(apartments)
-  }
+//   const [apartments, setApartments] = useState([])
+//   const getApartments = async () => {
+//       const response = await axios.get(API_URL)
+//       const apartments = response.data
+//       // const sorted_todos = todos.sort((a, b) => b.id - a.id);
+//       setApartments(apartments)
+//   }
 
-  useEffect(() => {
-      getApartments()
-  }, [])
+//   useEffect(() => {
+//       getApartments()
+//   }, [])
 
 
   return (

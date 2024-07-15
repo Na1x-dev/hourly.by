@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import './SearchStyles.css';
+import CityDropdown from "./CityDropdown";
 
-const ApartmentSearchForm = ({ searchApartments }) => {
+const ApartmentSearchForm = ({ searchApartment }) => {
     const [searchData, setSearchData] = useState({
         destination: "",
         checkInDate: "",
@@ -11,14 +12,23 @@ const ApartmentSearchForm = ({ searchApartments }) => {
         petsAllowed: false
     });
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        searchApartments(searchData);
-    };
+
+    
+    // const [showCityDropdown, setShowCityDropdown] = useState(false); // Добавляем состояние для отслеживания видимости CityDropdown
+
+    // const handleSearch = (e) => {
+    //     e.preventDefault();
+    //     searchApartments(searchData);
+    // };
 
     const handlePetsAllowedChange = (e) => {
         setSearchData({ ...searchData, petsAllowed: e.target.checked });
     };
+
+    // const handleInputClick = (e) => {
+    //     setShowCityDropdown(true); // При нажатии на input показываем CityDropdown
+    //     e.stopPropagation();
+    // };
 
     return (
         <form className="apartment-search-form">
@@ -30,11 +40,16 @@ const ApartmentSearchForm = ({ searchApartments }) => {
                         required
                         className="input font destination-input"
                         autoFocus
-                        value={searchData.destination}
+                        // value={searchData.destination}
                         onChange={(e) => setSearchData({ ...searchData, destination: e.target.value })}
                         type="text"
                         placeholder="Enter destination"
-                    /></div>
+                        
+                        // value={selectedCity}
+                    />
+                    {/* {showCityDropdown&&<CityDropdown ></CityDropdown>} */}
+                    <CityDropdown></CityDropdown>
+                    </div>
                 <div className="input-box">
                     <label className="font label">Check-in Date</label>
                     <input
@@ -87,7 +102,9 @@ const ApartmentSearchForm = ({ searchApartments }) => {
                         /></div>
                 </div>
             </div>
-            <button className="btn btn-primary search-button" type="submit" onClick={handleSearch}>
+            <button className="btn btn-primary search-button" type="submit" 
+            // onClick={handleSearch}
+            >
                 Search!
             </button>
         </form>
