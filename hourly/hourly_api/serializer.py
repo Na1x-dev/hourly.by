@@ -12,4 +12,11 @@ class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
         fields = ['city']
-       
+
+class ApartmentSearchSerializer(serializers.Serializer):
+    destination = serializers.CharField()
+    checkInDate = serializers.DateField()
+    checkOutDate = serializers.DateField()
+    adults = serializers.IntegerField()
+    children = serializers.IntegerField()
+    petsAllowed = serializers.BooleanField()

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './SearchStyles.css';
 import CityDropdown from "./CityDropdown";
+import axios from "axios";
+
 
 const ApartmentSearchForm = ({ searchApartment }) => {
     const [searchData, setSearchData] = useState({
@@ -12,23 +14,19 @@ const ApartmentSearchForm = ({ searchApartment }) => {
         petsAllowed: false
     });
 
-
-    
-    // const [showCityDropdown, setShowCityDropdown] = useState(false); // Добавляем состояние для отслеживания видимости CityDropdown
-
-    // const handleSearch = (e) => {
-    //     e.preventDefault();
-    //     searchApartments(searchData);
-    // };
-
     const handlePetsAllowedChange = (e) => {
         setSearchData({ ...searchData, petsAllowed: e.target.checked });
     };
 
-    // const handleInputClick = (e) => {
-    //     setShowCityDropdown(true); // При нажатии на input показываем CityDropdown
-    //     e.stopPropagation();
-    // };
+    const handleSearch = () => {
+        axios.post('http://localhost:8000/api/search', searchData)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
 
     return (
         <form className="apartment-search-form">
@@ -53,7 +51,7 @@ const ApartmentSearchForm = ({ searchApartment }) => {
                 <div className="input-box">
                     <label className="font label">Check-in Date</label>
                     <input
-                        required
+                        // required 
                         className="input font check-in-date-input"
                         value={searchData.checkInDate}
                         onChange={(e) => setSearchData({ ...searchData, checkInDate: e.target.value })}
@@ -63,7 +61,7 @@ const ApartmentSearchForm = ({ searchApartment }) => {
                 <div className="input-box">
                     <label className="font label">Check-out Date</label>
                     <input
-                        required
+                        // required
                         className="input font check-out-date-input"
                         value={searchData.checkOutDate}
                         onChange={(e) => setSearchData({ ...searchData, checkOutDate: e.target.value })}
@@ -73,7 +71,7 @@ const ApartmentSearchForm = ({ searchApartment }) => {
                 <div className="input-box">
                     <label className="font label">Adults</label>
                     <input
-                        required
+                        // required
                         className="input font adults-input"
                         value={searchData.adults}
                         onChange={(e) => setSearchData({ ...searchData, adults: parseInt(e.target.value) })}
@@ -83,7 +81,7 @@ const ApartmentSearchForm = ({ searchApartment }) => {
                 <div className="input-box">
                     <label className="font label">Children</label>
                     <input
-                        required
+                        // required
                         className="input font children-input"
                         value={searchData.children}
                         onChange={(e) => setSearchData({ ...searchData, children: parseInt(e.target.value) })}
@@ -102,8 +100,8 @@ const ApartmentSearchForm = ({ searchApartment }) => {
                         /></div>
                 </div>
             </div>
-            <button className="btn btn-primary search-button" type="submit" 
-            // onClick={handleSearch}
+            <button className="btn btn-primary search-button" type="button" 
+            onClick={handleSearch}
             >
                 Search!
             </button>

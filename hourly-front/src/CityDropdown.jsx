@@ -36,22 +36,34 @@ const CityDropdown = () => {
 
 const selectItem = (item) => {
   document.querySelector('.destination-input').value = item;
+  hideDropdown()
+}
+
+const hideDropdown = () => {
   document.querySelector('.dropdown').style.height = '0';
   document.querySelector('.dropdown').style.paddingTop = '0'
   document.querySelector('.dropdown').style.paddingBottom = '0'
   document.querySelector('.dropdown').style.borderBottom = '0'
 }
 
+const showDropdown = () => {
+  document.querySelector('.dropdown').style.height = '450px'
+  document.querySelector('.dropdown').style.paddingTop = '10px'
+  document.querySelector('.dropdown').style.paddingBottom = '10px'
+  document.querySelector('.dropdown').style.borderBottom = '2px solid #ccc'
+}
+
 setTimeout(() => {
   const destinationInput = document.querySelector('.destination-input');
-  destinationInput.onclick = () => { 
-    document.querySelector('.dropdown').style.height = '450px'
-     document.querySelector('.dropdown').style.paddingTop = '10px'
-  document.querySelector('.dropdown').style.paddingBottom = '10px'
-    document.querySelector('.dropdown').style.borderBottom = '2px solid #ccc'
-   
-    
+  const app = document.querySelector('.app');
+  app.onclick = () => {
+    hideDropdown()
   }
+  destinationInput.addEventListener('click', function(event) {
+    event.stopPropagation();
+    showDropdown()
+
+  });
 }, 100);
 
 export default CityDropdown;

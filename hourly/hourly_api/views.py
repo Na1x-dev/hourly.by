@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, generics
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Apartment
-from .permissions import AllForAdminOtherReadOnlyPermission
-from .serializer import ApartmentSerializer, CitySerializer
+# from .permissions import AllForAdminOtherReadOnlyPermission
+from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer
 
 
 class ApartmentViewSet(viewsets.ModelViewSet):
@@ -13,7 +14,19 @@ class ApartmentViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     # ordering = ['id']
-    
+
+class ApartmentSearchView(APIView):
+    def post(self, request):
+        serializer = ApartmentSearchSerializer(data=request.data)
+        if serializer.is_valid():
+            # Выполните здесь необходимую обработку данных
+            city = serializer.validated_data.get('destination')
+            # check_in_date = serializer.validated_data.get('checkInDate')
+            # Обработка данных и возврат результата
+            return Response({"message": "Data received successfully"})
+        else:
+            return Response(serializer.errors, status=400)
+            
 class CityListAPIView(generics.ListAPIView):
     queryset = Apartment.objects.values('city').distinct()
     serializer_class = CitySerializer

@@ -3,3 +3,8 @@ body, #root, .app{
     flex-direction: column;
     background-color: aliceblue;
 }
+
+.app{
+    min-height: 100vh;
+    
+}
