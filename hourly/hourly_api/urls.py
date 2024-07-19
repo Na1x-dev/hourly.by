@@ -9,6 +9,7 @@ router.register('apartment', ApartmentViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('get_cities', CityListAPIView.as_view(), name='city-list'),
-    path('search', ApartmentSearchView.as_view())
+    path('search', ApartmentSearchView.as_view()),
     # path('auth/', include('rest_framework.urls')),
 ]
+print(ApartmentSearchView)

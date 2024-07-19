@@ -7,6 +7,7 @@ class ApartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
         fields = '__all__'
+        
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:

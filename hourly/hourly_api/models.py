@@ -13,7 +13,7 @@ class Apartment(models.Model): #card-content
 
 
     def __str__(self):
-        return f"{self.title} - {self.price} {self.currency} - beds: {self.beds} - nights: {self.nights}"
+        return f"{self.title} - {self.price_per_day} - {self.location} - {self.rating}"
 
 
 

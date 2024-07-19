@@ -15,18 +15,35 @@ class ApartmentViewSet(viewsets.ModelViewSet):
     ]
     # ordering = ['id']
 
-class ApartmentSearchView(APIView):
+class ApartmentSearchView(generics.ListAPIView):
+    serializer_class = ApartmentSerializer
+    queryset = []
     def post(self, request):
         serializer = ApartmentSearchSerializer(data=request.data)
         if serializer.is_valid():
-            # Выполните здесь необходимую обработку данных
-            city = serializer.validated_data.get('destination')
-            # check_in_date = serializer.validated_data.get('checkInDate')
-            # Обработка данных и возврат результата
-            return Response({"message": "Data received successfully"})
+            city = serializer.data.get('destination')
+            queryset = Apartment.objects.filter(city=city)
+            print('hey')
+            return Response(self.get_serializer(queryset, many=True).data)
+        
         else:
-            return Response(serializer.errors, status=400)
+            city = serializer.data.get('destination')
+            queryset = Apartment.objects.filter(city=city)
+            print(queryset)
+            return Response(self.get_serializer(queryset, many=True).data)
+            # return Response(serializer.errors, status=400)
+        
+        
+        
+        # if serializer.is_valid():
+            # Выполните здесь необходимую обработку данных
+        #     # check_in_date = serializer.validated_data.get('checkInDate')
+        #     # Обработка данных и возврат результата
+        #     return Response({"message": "Data received successfully"})
+        # else:
+        #     return Response(serializer.errors, status=400)
             
 class CityListAPIView(generics.ListAPIView):
     queryset = Apartment.objects.values('city').distinct()
     serializer_class = CitySerializer
+    

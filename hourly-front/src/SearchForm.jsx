@@ -4,7 +4,7 @@ import CityDropdown from "./CityDropdown";
 import axios from "axios";
 
 
-const ApartmentSearchForm = ({ searchApartment }) => {
+const ApartmentSearchForm = () => {
     const [searchData, setSearchData] = useState({
         destination: "",
         checkInDate: "",
@@ -18,15 +18,25 @@ const ApartmentSearchForm = ({ searchApartment }) => {
         setSearchData({ ...searchData, petsAllowed: e.target.checked });
     };
 
-    const handleSearch = () => {
-        axios.post('http://localhost:8000/api/search', searchData)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+    const handleSearch = async () => {
+        const inputElement = document.querySelector('.destination-input');
+        inputElement.dispatchEvent(new Event('change'));
+        console.log(searchData)
+        try {
+            const response = await axios.post('http://localhost:8000/api/search', searchData);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
     };
+
+      const handleInputChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setSearchData(prevState => ({
+          ...prevState,
+          [name]: type === 'checkbox' ? checked : value
+        }));
+      };  
 
     return (
         <form className="apartment-search-form">
@@ -34,20 +44,18 @@ const ApartmentSearchForm = ({ searchApartment }) => {
             <div className="inputs-container">
                 <div className="input-box">
                     <label className="font label">Destination</label>
-                    <input
+                    <input type="text" name="destination" value={searchData.destination} onChange={handleInputChange}
                         required
                         className="input font destination-input"
                         autoFocus
+                        // onChange={handleDestinationChange}
                         // value={searchData.destination}
-                        onChange={(e) => setSearchData({ ...searchData, destination: e.target.value })}
-                        type="text"
-                        placeholder="Enter destination"
-                        
-                        // value={selectedCity}
+                    // type="text"
+                    placeholder="Enter destination"
                     />
                     {/* {showCityDropdown&&<CityDropdown ></CityDropdown>} */}
-                    <CityDropdown></CityDropdown>
-                    </div>
+                    <CityDropdown data={searchData}></CityDropdown>
+                </div>
                 <div className="input-box">
                     <label className="font label">Check-in Date</label>
                     <input
@@ -100,8 +108,8 @@ const ApartmentSearchForm = ({ searchApartment }) => {
                         /></div>
                 </div>
             </div>
-            <button className="btn btn-primary search-button" type="button" 
-            onClick={handleSearch}
+            <button className="btn btn-primary search-button" type="button"
+                onClick={handleSearch}
             >
                 Search!
             </button>
