@@ -12,6 +12,14 @@
     justify-content: space-between;
     padding: 10px;
     z-index: 2;
+    transition-duration: 0.2s;
+}
+
+.scrolled {
+    width: 99%;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: 2px #ccc solid;
 }
 
 .logo {
@@ -42,16 +50,21 @@
     transform: scale(-1, 1);
 }
 
-.login-button {
+.palm-image{
+    fill: red;
+}
+
+.to-login-button {
     background-color: #7fffd477;
     border: 0;
     color: #555;
     margin: 5px 0;
+    margin-right: 5px;
     padding: 0 30px;
     font-size: 16px;
 }
 
-.login-button:hover {
+.to-login-button:hover {
     background-color: #5fdfb490;
     color: #555;
 }

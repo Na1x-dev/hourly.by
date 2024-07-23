@@ -1,0 +1,47 @@
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 25vh;
+    background-color: #fff;
+    padding: 30px;
+    border: 2px #ccc solid;
+    border-radius: 20px;
+    color: #555;
+    
+}
+
+.form-input{
+    padding: 10px;
+    border: 2px #ccc solid;
+    border-radius: 10px;
+    width: 20vw;
+}
+
+.input-label{
+    display: block; /* Делает label блочным элементом */
+    margin-bottom: 5px; /* Отступ снизу для пространства между label и input */
+    font-weight: bold; /* Жирный текст */
+    color: #999; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+}
+
+.login-button {
+    align-self: center;
+    padding: 10px 30px;
+    border-radius: 10px;
+    background-color: #7fffd4;
+    border: 1px solid aquamarine;
+    color: #555;
+    font-size: 20px;
+    width: 150px;
+}
+
+.login-button:hover{
+    background-color:#5fdfb4;
+    border: 1px solid #5fdfb4;
+    color: #555;
+}
+
+.login-or
