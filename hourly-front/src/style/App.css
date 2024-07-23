@@ -1,0 +1,14 @@
+body, #root, .app{
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+}
+
+.app{
+    min-height: 200vh;
+    
+}

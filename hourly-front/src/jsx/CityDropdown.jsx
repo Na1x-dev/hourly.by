@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './CityDropdown.css'
+import '../style/CityDropdown.css'
 
 const CityDropdown = (props) => {
   const [cities, setCities] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './SearchStyles.css';
-import CityDropdown from "./CityDropdown";
+import '../style/SearchStyles.css';
+import CityDropdown from "../jsx/CityDropdown";
 import axios from "axios";
 
 
