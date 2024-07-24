@@ -3,7 +3,10 @@
     flex-direction: column;
     margin: auto;
     margin-top: 20vh;
-
+    background-color: #fff;
+    padding: 30px 30px 0 30px;
+    border: 2px #ccc solid;
+    border-radius: 20px;
     z-index: 1;
 }
 
@@ -16,6 +19,7 @@
 .inputs-container {
     display: flex;
     flex-direction: row;
+    /* margin: 20px; */
 }
 
 
@@ -84,4 +88,8 @@
     background-color:#5fdfb4;
     border: 1px solid #5fdfb4;
     color: #555;
+}
+
+input{
+    background-color: #f5f5f5;
 }

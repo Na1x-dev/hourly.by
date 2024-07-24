@@ -37,6 +37,11 @@
     font-size: 24px;
 }
 
+.logo:hover{
+    background-color: #5dddb2;
+    cursor: pointer;
+}
+
 .left-palm,
 .right-palm {
     display: flex;

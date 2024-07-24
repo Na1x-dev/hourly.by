@@ -1,22 +1,29 @@
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
+
 import '../style/Header.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const unfixHeader = () => {
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('.header');
-      if (window.scrollY > 0) {
-        header.classList.add('scrolled');
-      }
-      else header.classList.remove('scrolled');
-    })
-  }
+  const handleScroll = () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  };
 
-  unfixHeader();
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); 
+
 
   const toLoginForm = () => {
     navigate("/login");
@@ -25,6 +32,8 @@ const Header = () => {
   const toHomePage = () => {
     navigate("/");
   }
+
+  const hideLoginButtonRoutes = ['/login', '/register'];
 
   return (
     <header className='header'>
@@ -37,8 +46,11 @@ const Header = () => {
         <div className=''>Horly.BY</div>
         <svg className='right-palm'>
           <image className='palm-image' xlinkHref="https://svgsilh.com/svg/23907.svg" src="https://svgsilh.com/svg/23907.svg" width="100%" height="100%" />
-        </svg></div>
-      <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button>
+        </svg>
+      </div>
+      {!hideLoginButtonRoutes.includes(location.pathname) && (
+        <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button>
+      )}
     </header>
 
   );
