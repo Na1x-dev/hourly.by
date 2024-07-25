@@ -17,6 +17,8 @@ const API_URL = "http://127.0.0.1:8000/api/apartment/"
 
 
 function App() {
+
+  
   //   const [apartments, setApartments] = useState([])
   //   const getApartments = async () => {
   //       const response = await axios.get(API_URL)

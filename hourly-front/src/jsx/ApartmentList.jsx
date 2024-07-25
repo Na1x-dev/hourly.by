@@ -1,32 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Apartment from './Apartment'
+import '../style/Apartment.css'
 
-class ApartmentList extends Component {
-  state = {
-    apartments: []
-  }
 
-  componentDidMount() {
-    axios.get('http://127.0.0.1:8000/api/apartment/')
-      .then(res => {
-        const apartments = res.data;
-        this.setState({ apartments });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Список квартир</h1>
-        <ul>
-          {this.state.apartments.map(apartment => <li key={apartment.id}>{apartment.title}</li>)}
-        </ul>
-      </div>
-    );
-  }
+const ApartmentList = ({ apartments }) => {
+  return (
+    <div className='apartment-list'>
+      {apartments.map(apartment =>
+        <Apartment key={apartment.id} apartment={apartment}></Apartment>
+      )}
+    </div>
+  );
 }
 
 export default ApartmentList;

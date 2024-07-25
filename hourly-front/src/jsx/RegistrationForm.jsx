@@ -112,7 +112,7 @@ const RegistrationForm = () => {
           </div>
         </div>
         <button className='btn btn-primary register-button' type="button">Register</button>
-        <div className='to-login-text'>or <span  onClick={toLoginForm} className='to-login'>login</span></div>
+        <div className='to-login-text'>or <span onClick={toLoginForm} className='to-login'>login</span></div>
       </form>
     </div>
   );
