@@ -11,6 +11,5 @@ body, #root, .app{
 
 
 .app{
-    min-height: 200vh;
-    
+    min-height: 100vh;
 }

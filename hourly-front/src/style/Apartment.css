@@ -1,5 +1,62 @@
-.apartment-list{
+.apartment-list {
+    margin-top: 100px;
     display: grid;
-    grid-template-columns: auto auto;
-    width: 80%;
+    grid-template-columns: 1fr 1fr;
+    width: 60%;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.apartment-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+
+}
+
+.card-image {
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 0 20px;
+    color: #777;
+    height: 100%;
+    justify-self: end;
+}
+
+.apartment-title {
+    font-size: 18px;
+    padding: 10px;
+    margin-bottom: 0;
+    color: #444;
+
+}
+
+.see-card-button {
+    margin: 20px;
+    background-color: #7fffd4;
+    border: 0;
+    color: #555;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.see-card-button:hover {
+    background-color: #5fdfb4;
+    border: 0;
+    color: #555;
+}
+
+.horizontal-line {
+    height: 2px;
+    width: 100%;
+    background-color: #ccc;
+    margin-bottom: 10px;
 }
