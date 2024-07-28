@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from rest_framework import viewsets, permissions, generics
+from rest_framework import viewsets, permissions, generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from .models import Apartment
 # from .permissions import AllForAdminOtherReadOnlyPermission
-from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer
+from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer
 
 
 class ApartmentViewSet(viewsets.ModelViewSet):
@@ -45,4 +47,32 @@ class ApartmentSearchView(generics.ListAPIView):
 class CityListAPIView(generics.ListAPIView):
     queryset = Apartment.objects.values('city').distinct()
     serializer_class = CitySerializer
-    
+
+
+class RegistrationAPIView(APIView):
+
+    def post(self, request):
+
+        serializer = CustomUserSerializer(data=request.data)
+
+        if serializer.is_valid():
+
+            user = serializer.save()
+
+            refresh = RefreshToken.for_user(user) # Создание Refesh и Access
+
+            refresh.payload.update({    # Полезная информация в самом токене
+
+                'user_id': user.id,
+
+                'email': user.email
+
+            })
+
+            return Response({
+
+                'refresh': str(refresh),
+
+                'access': str(refresh.access_token), # Отправка на клиент
+
+            }, status=status.HTTP_201_CREATED)

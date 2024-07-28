@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 import React, { useState } from 'react';
-
+import axios from 'axios';
 
 const LoginForm = () => {
     const [credentials, setCredentials] = useState({
@@ -20,11 +20,24 @@ const LoginForm = () => {
         setCredentials({ ...credentials, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Здесь вы можете добавить логику для отправки данных на сервер
-        console.log('Login credentials:', credentials);
-        // Например, вызвать API для аутентификации
+        try {
+            const response = await axios.post('http://localhost:8000/api/token/', {
+                email: credentials.email,
+                password: credentials.password,
+            });
+            
+            // Сохраните токены в localStorage
+            localStorage.setItem('accessToken', response.data.access);
+            localStorage.setItem('refreshToken', response.data.refresh);
+            
+            // Перенаправление после успешного входа
+            navigate('/dashboard'); // Или любая другая страница
+        } catch (error) {
+            console.error('Ошибка входа:', error);
+            // Здесь можно добавить обработку ошибок, например, показать сообщение пользователю
+        }
     };
 
     return (
@@ -55,7 +68,7 @@ const LoginForm = () => {
                         />
                     </div>
                 </div>
-                <button className='btn btn-primary login-button' type="button">Enter</button>
+                <button className='btn btn-primary login-button' onClick={handleSubmit} type="button">Enter</button>
                 <div className='to-register-part'>
                     <div className='login-or'>or</div>
                     <div onClick={toRegistrationForm} className='to-register'>register</div>
