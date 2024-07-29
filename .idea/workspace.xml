@@ -6,22 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fe766a80-907b-4060-a5d8-3d163202ba8e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly-front/src/jsx/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/hourly-front/src/jsx/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hourly/hourly_api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0002_rename_beds_apartment_size_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0003_alter_apartment_capacity_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0004_rename_room_image_apartment_image_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0005_rename_image_apartment_image_url_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0006_remove_apartment_total_price.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0007_apartment_city.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0008_alter_apartment_city.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/migrations/0009_user.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/hourly/hourly_api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/serializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hourly/hourly_api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hourly/hourly_api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

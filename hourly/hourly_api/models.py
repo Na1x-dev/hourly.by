@@ -3,8 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 
-
-class Apartment(models.Model): #card-content
+class Apartment(models.Model):  # card-content
     room_type = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -14,13 +13,12 @@ class Apartment(models.Model): #card-content
     price_per_day = models.CharField(max_length=50)
     image_url = models.TextField()
 
-
     def __str__(self):
         return f"{self.title} - {self.price_per_day} - {self.location} - {self.rating}"
 
 
-
 class CustomUserManager(BaseUserManager):
+
     def create_user(self, email, password=None, **extra_fields):
         """Создает и возвращает пользователя с электронной почтой и паролем."""
         if not email:
@@ -39,7 +37,6 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30, verbose_name='Имя')
     last_name = models.CharField(max_length=30, verbose_name='Фамилия')
@@ -55,11 +52,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return f"{self.last_name} {self.first_name[0]}. {self.patronymic[0]}."
-
+        if len(self.first_name) > 0 and len(self.last_name) > 0 and len(self.patronymic) > 0:
+            return f"{self.last_name} {self.first_name[0]}. {self.patronymic[0]}."
+        else: 
+            return f"admin - {self.email}"
+        
+        
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-
-
 
