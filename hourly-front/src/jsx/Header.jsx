@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
-
+import { useAuth } from './AuthContext';
 import '../style/Header.css'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  // const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+// console.log(user)
 
   const handleScroll = () => {
     const header = document.querySelector('.header');
@@ -22,7 +25,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []); 
+  }, []);
 
 
   const toLoginForm = () => {
@@ -48,9 +51,19 @@ const Header = () => {
           <image className='palm-image' xlinkHref="https://svgsilh.com/svg/23907.svg" src="https://svgsilh.com/svg/23907.svg" width="100%" height="100%" />
         </svg>
       </div>
-      {!hideLoginButtonRoutes.includes(location.pathname) && (
-        <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button>
-      )}
+      {/* {user ? */}
+        (<div className='header-right-buttons'>
+          <button className='menu-button btn btn-primary' >menu</button>
+          {/* <button className='logout-button btn btn-primary' onClick={logout}>logout</button> */}
+        </div>) :
+        {/* ( */}
+          {/* (!hideLoginButtonRoutes.includes(location.pathname) && ( */}
+            {/* <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button> */}
+          {/* )))} */}
+
+
+
+
     </header>
 
   );

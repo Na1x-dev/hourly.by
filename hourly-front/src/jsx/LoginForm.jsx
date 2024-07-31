@@ -33,7 +33,7 @@ const LoginForm = () => {
             localStorage.setItem('refreshToken', response.data.refresh);
             
             // Перенаправление после успешного входа
-            navigate('/dashboard'); // Или любая другая страница
+            navigate('/'); // Или любая другая страница
         } catch (error) {
             console.error('Ошибка входа:', error);
             // Здесь можно добавить обработку ошибок, например, показать сообщение пользователю
