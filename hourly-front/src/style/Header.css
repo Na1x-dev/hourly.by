@@ -38,9 +38,14 @@
     transition-duration: 0.2s;
 }
 
-.logo:hover{
+.logo:hover {
     background-color: #5dddb2;
     cursor: pointer;
+}
+
+.logo:active {
+    background-color: #3dbd92;
+    color: #fff;
 }
 
 .left-palm,
@@ -56,12 +61,14 @@
     transform: scale(-1, 1);
 }
 
-.palm-image{
+.palm-image {
     fill: red;
 }
 
+.logout-button,
+.menu-button,
 .to-login-button {
-    background-color: #7fffd477;
+    background-color: #eee;
     border: 0;
     color: #555;
     margin: 5px 0;
@@ -70,12 +77,41 @@
     font-size: 16px;
 }
 
+.to-login-button{
+    background-color: #7fffd477;
+}
+
 .to-login-button:hover {
     background-color: #5fdfb490;
     color: #555;
 }
 
-.header-right-buttons{
+.logout-button:hover{
+    background-color:rgb(255, 185, 185);
+    color: #555;
+}
+
+.menu-button:hover{
+    background-color: #ddd;
+    color: #555;
+}
+
+.to-login-button:active:focus{
+    background-color:#3fbf94;
+    color: #fff;
+}
+
+.menu-button:active:focus{
+    background-color:#bbb;
+    color: #fff;
+}
+
+.logout-button:active:focus{
+    background-color:rgb(252, 160, 160);
+    color: #fff;
+}
+
+.header-right-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px

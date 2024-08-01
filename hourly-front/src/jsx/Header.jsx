@@ -5,11 +5,12 @@ import '../style/Header.css'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
-  // const { user, logout } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth()
+
   const navigate = useNavigate();
   const location = useLocation();
 
-// console.log(user)
+  // console.log(isAuthenticated());
 
   const handleScroll = () => {
     const header = document.querySelector('.header');
@@ -26,6 +27,11 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const logoutFunction = ()=>{
+    logout()
+    navigate('/login')
+  }
 
 
   const toLoginForm = () => {
@@ -51,15 +57,15 @@ const Header = () => {
           <image className='palm-image' xlinkHref="https://svgsilh.com/svg/23907.svg" src="https://svgsilh.com/svg/23907.svg" width="100%" height="100%" />
         </svg>
       </div>
-      {/* {user ? */}
+      {user ?
         (<div className='header-right-buttons'>
           <button className='menu-button btn btn-primary' >menu</button>
-          {/* <button className='logout-button btn btn-primary' onClick={logout}>logout</button> */}
+          <button className='logout-button btn btn-primary' onClick={logoutFunction}>logout</button>
         </div>) :
-        {/* ( */}
-          {/* (!hideLoginButtonRoutes.includes(location.pathname) && ( */}
-            {/* <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button> */}
-          {/* )))} */}
+        (
+          // (!hideLoginButtonRoutes.includes(location.pathname) && (
+            <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button>
+          )}
 
 
 

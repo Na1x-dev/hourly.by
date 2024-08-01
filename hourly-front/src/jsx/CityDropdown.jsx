@@ -28,14 +28,14 @@ const CityDropdown = (props) => {
 
 
   const hideDropdown = () => {
-    document.querySelector('.dropdown').style.height = '0';
+    document.querySelector('.dropdown').style.maxHeight = '0';
     document.querySelector('.dropdown').style.paddingTop = '0'
     document.querySelector('.dropdown').style.paddingBottom = '0'
     document.querySelector('.dropdown').style.borderBottom = '0'
   }
 
   const showDropdown = () => {
-    document.querySelector('.dropdown').style.height = '450px'
+    document.querySelector('.dropdown').style.maxHeight = '300px'
     document.querySelector('.dropdown').style.paddingTop = '10px'
     document.querySelector('.dropdown').style.paddingBottom = '10px'
     document.querySelector('.dropdown').style.borderBottom = '2px solid #ccc'

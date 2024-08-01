@@ -38,7 +38,7 @@
     padding: 10px 30px;
     border-radius: 10px;
     background-color: #7fffd4;
-    border: 1px solid aquamarine;
+    border: 0;
     color: #555;
     font-size: 20px;
     width: 150px;
@@ -46,9 +46,14 @@
 
 .login-button:hover, .register-button:hover {
     background-color: #5fdfb4;
-    border: 1px solid #5fdfb4;
     color: #555;
 }
+
+.login-button:active:focus, .register-button:active:focus {
+    background-color: #3fbf94;
+    color: #fff;
+}
+
 
 .to-register-part {
     display: flex;

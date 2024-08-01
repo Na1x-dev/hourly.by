@@ -1,20 +1,25 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
+
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
-        const token = localStorage.getItem('token');
-        return token ? JSON.parse(atob(token.split('.')[1])) : null; // Декодируем токен для получения информации о пользователе
+        const accessToken = localStorage.getItem('accessToken');
+        return accessToken ? JSON.parse(atob(accessToken.split('.')[1])) : null; // Декодируем access-токен для получения информации о пользователе
     });
+   
 
-    const login = (token) => {
-        localStorage.setItem('token', token);
-        setUser(JSON.parse(atob(token.split('.')[1]))); // Обновляем состояние пользователя
+
+    const login = (accessToken, refreshToken) => {
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        setUser(JSON.parse(atob(accessToken.split('.')[1]))); // Обновляем состояние пользователя
     };
 
     const logout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
         setUser(null);
     };
 

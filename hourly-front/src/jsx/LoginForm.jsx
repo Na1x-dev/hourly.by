@@ -2,8 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 import React, { useState } from 'react';
 import axios from 'axios';
+import {  useAuth } from '../jsx/AuthContext'; 
 
 const LoginForm = () => {
+    const {login} = useAuth()
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -28,17 +30,18 @@ const LoginForm = () => {
                 password: credentials.password,
             });
             
-            // Сохраните токены в localStorage
-            localStorage.setItem('accessToken', response.data.access);
-            localStorage.setItem('refreshToken', response.data.refresh);
+            // Используйте функцию login из контекста
+            login(response.data.access, response.data.refresh);
             
             // Перенаправление после успешного входа
             navigate('/'); // Или любая другая страница
+            // console.log(useAuth())
         } catch (error) {
             console.error('Ошибка входа:', error);
-            // Здесь можно добавить обработку ошибок, например, показать сообщение пользователю
+            // setErrorMessage('Неправильный email или пароль. Попробуйте еще раз.');
         }
     };
+    
 
     return (
         <div>

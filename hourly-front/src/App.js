@@ -1,24 +1,20 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import ApartmentList from './jsx/ApartmentList';
-import ApartmentSearchForm from './jsx/SearchForm';
-import Header from './jsx/Header'
-import Footer from './jsx/Footer'
 import './style/App.css';
 import Login from './pages/Login.js'
 import Register from './pages/Register.js'
 import Home from './pages/Home.js'
 import NotFound from './pages/NotFound'
+import { AuthProvider } from './jsx/AuthContext.jsx';
+// import {ProtectedRoute} from '../src/ProtectedRoute.js'
 // import Login from './Login';
 // import Register from './Register';
 
-const API_URL = "http://127.0.0.1:8000/api/apartment/"
+// const API_URL = "http://127.0.0.1:8000/api/apartment/"
 
 
 function App() {
 
-  
+
   //   const [apartments, setApartments] = useState([])
   //   const getApartments = async () => {
   //       const response = await axios.get(API_URL)
@@ -41,16 +37,18 @@ function App() {
     //     {/* <ApartmentList  apartments={apartments}></ApartmentList>   */}
     //     <Footer></Footer>
     // </div>
-    <Router>
-      {/* <div className='app'> */}
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route exact path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      {/* </div> */}
-    </Router>
+    <AuthProvider>
+      <Router>
+        {/* <div className='app'> */}
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route exact  path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        {/* </div> */}
+      </Router>
+    </AuthProvider>
   );
 }
 

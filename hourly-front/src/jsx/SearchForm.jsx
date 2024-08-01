@@ -21,7 +21,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
     const handleSubmit = (event) => {
         event.preventDefault();// Соберите ваши данные поиска из формы
         onSearch(searchData); // Вызовите метод поиска с данными
-      };
+    };
 
 
     const handleInputChange = (e) => {
@@ -95,11 +95,13 @@ const ApartmentSearchForm = ({ onSearch }) => {
                     <div className="checkbox-container form-switch">
                         <input
                             id="flexSwitchCheckDefault"
-                            className="font form-check-input pets-allowed-checkbox "
+                            className="form-check-input pets-allowed-checkbox "
                             type="checkbox"
                             checked={searchData.petsAllowed}
                             onChange={handlePetsAllowedChange}
-                        /></div>
+                        />
+                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                    </div>
                 </div>
             </div>
             <button className="btn btn-primary search-button" type="button"

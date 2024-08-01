@@ -6,7 +6,7 @@ const Logout = () => {
 
     const handleLogout = () => {
         logout();
-        // window.location.href = '/'; 
+        
     };
 
     return <button onClick={handleLogout}>Выйти</button>;
