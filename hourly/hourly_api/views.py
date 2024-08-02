@@ -4,9 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
+
 from .models import Apartment
 # from .permissions import AllForAdminOtherReadOnlyPermission
-from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer
+from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer, CustomUserCreateSerializer
 
 
 class ApartmentViewSet(viewsets.ModelViewSet):
@@ -76,3 +77,8 @@ class RegistrationAPIView(APIView):
                 'access': str(refresh.access_token), # Отправка на клиент
 
             }, status=status.HTTP_201_CREATED)
+            
+
+
+class RegisterView(generics.CreateAPIView):
+    serializer_class = CustomUserCreateSerializer

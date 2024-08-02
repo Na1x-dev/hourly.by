@@ -1,42 +1,56 @@
 import '../style/Login.css'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    middleName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [patronymic, setPatronymic] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+  // let confirmPassword = '';
+
 
   const toLoginForm = () => {
     navigate("/login");
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Здесь вы можете добавить логику для отправки данных на сервер
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       alert("Пароли не совпадают!");
       return;
     }
-
-    console.log('Registration data:', formData);
+    try {
+      await axios.post('http://localhost:8000/api/register/', {
+        email,
+        first_name: firstName,
+        last_name: lastName,
+        patronymic,
+        password,
+      });
+      alert('Регистрация успешна!');
+    } catch (error) {
+      console.error('Произошла ошибка!', error);
+      alert('Регистрация не удалась!');
+    }
+    // console.log('Registration data:', formData);
     // Например, вызвать API для регистрации
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className='registration-form'>
+      <form className='registration-form'>
         <h2>Registration</h2>
         <div className='form-inputs'>
           <div className='left-column'>
@@ -46,8 +60,8 @@ const RegistrationForm = () => {
                 className='form-input'
                 type="text"
                 name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
+                value={firstName}
+                onChange={(e)=>setFirstName(e.target.value)}
                 required
               />
             </div>
@@ -57,8 +71,8 @@ const RegistrationForm = () => {
                 className='form-input'
                 type="text"
                 name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
+                value={lastName}
+                onChange={(e)=>setLastName(e.target.value)}
                 required
               />
             </div>
@@ -68,8 +82,8 @@ const RegistrationForm = () => {
                 className='form-input'
                 type="text"
                 name="middleName"
-                value={formData.middleName}
-                onChange={handleChange}
+                value={patronymic}
+                onChange={(e)=>setPatronymic(e.target.value)}
                 required
               />
             </div>
@@ -82,8 +96,8 @@ const RegistrationForm = () => {
                 className='form-input'
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 required
               />
             </div>
@@ -93,8 +107,8 @@ const RegistrationForm = () => {
                 className='form-input'
                 type="password"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 required
               />
             </div>
@@ -104,14 +118,14 @@ const RegistrationForm = () => {
                 className='form-input'
                 type="password"
                 name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
+                value={confirmPassword}
+                onChange={(e)=>setConfirmPassword(e.target.value)}
                 required
               />
             </div>
           </div>
         </div>
-        <button className='btn btn-primary register-button' type="button">Register</button>
+        <button className='btn btn-primary register-button' onClick={handleSubmit} type="button">Register</button>
         <div className='to-login-text'>or <span onClick={toLoginForm} className='to-login'>login</span></div>
       </form>
     </div>
