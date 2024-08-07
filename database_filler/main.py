@@ -13,7 +13,7 @@ cities = {'kaliningrad.html', 'kazan.html', 'minsk.html', 'moscow.html', 'novgor
 def create_connect():
     conn = psycopg2.connect(
         dbname="hourly",
-        user="root",
+        user="postgres",
         password="1234",
         host="localhost",
         port="5432"
@@ -23,7 +23,7 @@ def create_connect():
 
 
 def parse_card_data(city_item):
-    with open(os.path.abspath('database_filler/cities/' + city_item), 'r') as file:
+    with open(os.path.abspath('cities/' + city_item), 'r') as file:
         city_content = file.read()
 
     soup = BeautifulSoup(city_content, 'html.parser')

@@ -1,15 +1,35 @@
-body, #root, .app{
+body,
+#root,
+.app {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     /* justify-content: center; */
+    background: linear-gradient(to bottom right, rgb(0, 176, 189), rgb(0, 160, 67));
     align-items: center;
     width: 100%;
 }
 
+.btn {
+    background-color: #7fffd4;
+    color: #555;
+    border: 0;
+    transition-duration: 0.2s;
+}
+
+.btn:hover {
+    background-color: #5dddb2;
+    cursor: pointer;
+    color: #555;
+}
+
+.btn:active, .btn:active:focus {
+    background-color: #3dbd92;
+    color: #fff;
+}
 
 
-.app{
+.app {
     min-height: 100vh;
 }

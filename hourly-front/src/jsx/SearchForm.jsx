@@ -21,6 +21,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
     const handleSubmit = (event) => {
         event.preventDefault();// Соберите ваши данные поиска из формы
         onSearch(searchData); // Вызовите метод поиска с данными
+        document.getElementById('apartment-list').scrollIntoView({ behavior: 'smooth' });
     };
 
 
