@@ -1,7 +1,7 @@
 .login-form {
     display: flex;
     flex-direction: column;
-    
+
     margin-top: 25vh;
     background-color: #fff;
     padding: 30px;
@@ -10,7 +10,7 @@
     color: #555;
 }
 
-.login-form-inputs{
+.login-form-inputs {
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -33,7 +33,8 @@
     font-size: 16px;
 }
 
-.login-button, .register-button {
+.login-button,
+.register-button {
     align-self: center;
     padding: 10px 30px;
     border-radius: 10px;
@@ -44,12 +45,14 @@
     width: 150px;
 }
 
-.login-button:hover, .register-button:hover {
+.login-button:hover,
+.register-button:hover {
     background-color: #5fdfb4;
     color: #555;
 }
 
-.login-button:active:focus, .register-button:active:focus {
+.login-button:active:focus,
+.register-button:active:focus {
     background-color: #3fbf94;
     color: #fff;
 }
@@ -94,17 +97,21 @@
     width: 2px;
 }
 
-.to-login-text{
+.to-login-text {
     align-self: end;
     font-size: 18px;
     color: #555;
 }
 
-.to-login{
+.to-login {
     color: #5fdfb4;
 }
 
-.to-login:hover{
+.to-login:hover {
     color: #3fbf94;
     cursor: pointer;
+}
+
+.error-field{
+    border: 2px solid #ff8181;
 }

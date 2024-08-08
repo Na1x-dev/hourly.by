@@ -2,6 +2,7 @@ import '../style/Login.css'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../jsx/AuthContext';
 
 
 const RegistrationForm = () => {
@@ -13,6 +14,7 @@ const RegistrationForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   // let confirmPassword = '';
+  const { login } = useAuth()
 
 
   const toLoginForm = () => {
@@ -27,26 +29,46 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Здесь вы можете добавить логику для отправки данных на сервер
-    if (password !== confirmPassword) {
-      alert("Пароли не совпадают!");
-      return;
+    if (!checkIsEmptyFields()) {
+      if (password !== confirmPassword) {
+        alert("Пароли не совпадают!");
+        return;
+      }
+      try {
+        await axios.post('http://localhost:8000/api/register/', {
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          patronymic,
+          password,
+        });
+        const response = await axios.post('http://localhost:8000/api/token/', {
+          email,
+          password,
+        });
+        login(response.data.access, response.data.refresh);
+        navigate('/')
+      } catch (error) {
+        console.error('Произошла ошибка!', error);
+        alert('Регистрация не удалась!');
+      }
     }
-    try {
-      await axios.post('http://localhost:8000/api/register/', {
-        email,
-        first_name: firstName,
-        last_name: lastName,
-        patronymic,
-        password,
-      });
-      alert('Регистрация успешна!');
-    } catch (error) {
-      console.error('Произошла ошибка!', error);
-      alert('Регистрация не удалась!');
-    }
-    // console.log('Registration data:', formData);
-    // Например, вызвать API для регистрации
   };
+
+  const checkIsEmptyFields = () => {
+    let flag = false;
+    const fields = document.getElementsByClassName('form-input');
+    for (let field of fields) {
+      if (field.value == '') {
+        field.classList.add('error-field');
+        flag = true;
+      }
+      else field.classList.remove('error-field');
+    }
+    if (flag)
+      alert("Не все поля заполенены");
+    return flag;
+  }
 
   return (
     <div>
@@ -61,7 +83,7 @@ const RegistrationForm = () => {
                 type="text"
                 name="firstName"
                 value={firstName}
-                onChange={(e)=>setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
                 required
               />
             </div>
@@ -72,7 +94,7 @@ const RegistrationForm = () => {
                 type="text"
                 name="lastName"
                 value={lastName}
-                onChange={(e)=>setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
                 required
               />
             </div>
@@ -83,7 +105,7 @@ const RegistrationForm = () => {
                 type="text"
                 name="middleName"
                 value={patronymic}
-                onChange={(e)=>setPatronymic(e.target.value)}
+                onChange={(e) => setPatronymic(e.target.value)}
                 required
               />
             </div>
@@ -97,7 +119,7 @@ const RegistrationForm = () => {
                 type="email"
                 name="email"
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -108,7 +130,7 @@ const RegistrationForm = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -119,7 +141,7 @@ const RegistrationForm = () => {
                 type="password"
                 name="confirmPassword"
                 value={confirmPassword}
-                onChange={(e)=>setConfirmPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
             </div>

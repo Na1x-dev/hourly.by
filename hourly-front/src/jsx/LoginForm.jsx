@@ -2,10 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 import React, { useState } from 'react';
 import axios from 'axios';
-import {  useAuth } from '../jsx/AuthContext'; 
+import { useAuth } from '../jsx/AuthContext';
 
 const LoginForm = () => {
-    const {login} = useAuth()
+    const { login } = useAuth()
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -24,24 +24,34 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8000/api/token/', {
-                email: credentials.email,
-                password: credentials.password,
-            });
-            
-            // Используйте функцию login из контекста
-            login(response.data.access, response.data.refresh);
-            
-            // Перенаправление после успешного входа
-            navigate('/'); // Или любая другая страница
-            // console.log(useAuth())
-        } catch (error) {
-            console.error('Ошибка входа:', error);
-            // setErrorMessage('Неправильный email или пароль. Попробуйте еще раз.');
-        }
+        if (!checkIsEmptyFields())
+            try {
+                const response = await axios.post('http://localhost:8000/api/token/', {
+                    email: credentials.email,
+                    password: credentials.password,
+                });
+                login(response.data.access, response.data.refresh);
+                navigate('/');
+            } catch (error) {
+                console.error('Ошибка входа:', error);
+                alert("Не верные логин и(или) пароль")
+            }
     };
-    
+
+    const checkIsEmptyFields = () => {
+        let flag = false;
+        const fields = document.getElementsByClassName('form-input');
+        for (let field of fields) {
+            if (field.value == '') {
+                field.classList.add('error-field');
+                flag = true;
+            }
+            else field.classList.remove('error-field');
+        }
+        if (flag)
+            alert("Не все поля заполенены");
+        return flag;
+    }
 
     return (
         <div>
@@ -51,12 +61,12 @@ const LoginForm = () => {
                     <div>
                         <label className='input-label email-label'>email</label>
                         <input
+                            required='required'
                             className='form-input'
                             type="email"
                             name="email"
                             value={credentials.email}
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div>
@@ -67,7 +77,7 @@ const LoginForm = () => {
                             name="password"
                             value={credentials.password}
                             onChange={handleChange}
-                            required
+                            required='required'
                         />
                     </div>
                 </div>
