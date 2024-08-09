@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../style/CityDropdown.css'
+import { getReq } from '../Api';
 
 const CityDropdown = (props) => {
   const [cities, setCities] = useState([]);
   useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/get_cities');
-        setCities(response.data);
+    const fetchCities = async() => {
+       try {
+        const response = await getReq('get_cities');
+        setCities(response);
       } catch (error) {
         console.error('Error fetching cities', error);
       }

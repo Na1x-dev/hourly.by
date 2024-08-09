@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../jsx/AuthContext';
-
+import { postReq } from '../Api';
 
 const RegistrationForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -35,18 +35,18 @@ const RegistrationForm = () => {
         return;
       }
       try {
-        await axios.post('http://localhost:8000/api/register/', {
+        await postReq('/register/', {
           email,
           first_name: firstName,
           last_name: lastName,
           patronymic,
           password,
         });
-        const response = await axios.post('http://localhost:8000/api/token/', {
+        const response = await postReq('/token/', {
           email,
           password,
         });
-        login(response.data.access, response.data.refresh);
+        login(response.access, response.refresh);
         navigate('/')
       } catch (error) {
         console.error('Произошла ошибка!', error);

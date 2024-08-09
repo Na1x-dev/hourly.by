@@ -5,7 +5,7 @@ import ApartmentSearchForm from '../jsx/SearchForm';
 import ApartmentList from '../jsx/ApartmentList';
 import axios from 'axios';
 import {  useAuth } from '../jsx/AuthContext'; 
-
+import { getReq, postReq } from '../Api';
 
 const Home = () => {
   const [apartments, setApartments] = useState([]);
@@ -13,8 +13,8 @@ const Home = () => {
   
   const handleSearch = async (searchData) => {
     try {
-      const response = await axios.post('http://localhost:8000/api/search', searchData);
-      setApartments(response.data);
+      const response = await postReq('/search', searchData);
+      setApartments(response);
     } catch (error) {
       console.error(error);
     }

@@ -3,6 +3,8 @@ import '../style/Login.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../jsx/AuthContext';
+import { postReq, getReq } from '../Api';
+
 
 const LoginForm = () => {
     const { login } = useAuth()
@@ -24,18 +26,22 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!checkIsEmptyFields())
+    
+        if (!checkIsEmptyFields()) {
+            const credentialsData = {
+                email: credentials.email,
+                password: credentials.password,
+            };
+    
             try {
-                const response = await axios.post('http://localhost:8000/api/token/', {
-                    email: credentials.email,
-                    password: credentials.password,
-                });
-                login(response.data.access, response.data.refresh);
+                const response = await postReq('/token/', credentialsData);
+                login(response.access, response.refresh);
                 navigate('/');
             } catch (error) {
                 console.error('Ошибка входа:', error);
-                alert("Не верные логин и(или) пароль")
+                alert("Не верные логин и(или) пароль");
             }
+        }
     };
 
     const checkIsEmptyFields = () => {

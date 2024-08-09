@@ -3,14 +3,25 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import '../style/Header.css'
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getReq } from '../Api';
 
 const Header = () => {
   const { user, logout, isAuthenticated } = useAuth()
-
+  console.log(user)
   const navigate = useNavigate();
   const location = useLocation();
+  const accessToken = '';
 
-  // console.log(isAuthenticated());
+  const showUser = async () => {
+    const response = await getReq('users/' + user.user_id, {
+      headers: {
+        Authorization: localStorage.getItem('accessToken', accessToken),
+      }
+    });
+    console.log(response)
+   }
+
+   showUser()
 
   const handleScroll = () => {
     const header = document.querySelector('.header');
@@ -28,7 +39,7 @@ const Header = () => {
     };
   }, []);
 
-  const logoutFunction = ()=>{
+  const logoutFunction = () => {
     logout()
     navigate('/login')
   }
@@ -59,13 +70,14 @@ const Header = () => {
       </div>
       {user ?
         (<div className='header-right-buttons'>
+          <div className='header-user-name'>admin a.a.</div>
           <button className='menu-button btn btn-primary' >menu</button>
           <button className='logout-button btn btn-primary' onClick={logoutFunction}>logout</button>
         </div>) :
         (
           // (!hideLoginButtonRoutes.includes(location.pathname) && (
-            <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button>
-          )}
+          <button className='to-login-button btn btn-primary' onClick={toLoginForm}>login</button>
+        )}
 
 
 
