@@ -12,9 +12,9 @@ const Header = () => {
 
   const showUser = async () => {
     try {
-      const response = await getReq(`users/${user.user_id}/`, { // Используем шаблонные строки
+      const response = await getReq(`users/${user.user_id}/`, { 
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Добавляем "Bearer" перед токеном, если это требуется
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`, 
         },
       });
       document.querySelector('.header-user-name').textContent = response;
