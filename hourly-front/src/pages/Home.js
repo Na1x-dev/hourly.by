@@ -9,7 +9,6 @@ import { getReq, postReq } from '../Api';
 
 const Home = () => {
   const [apartments, setApartments] = useState([]);
-  console.log(useAuth())
   
   const handleSearch = async (searchData) => {
     try {

@@ -18,14 +18,15 @@ const postReq= async (endpoint, data) => {
 };
 
 // Общий метод для выполнения GET-запросов
-const getReq = async (endpoint) => {
+const getReq = async (endpoint, config = {}) => {
     try {
-        const response = await apiClient.get(endpoint);
+        const response = await apiClient.get(endpoint, config);
         return response.data;
     } catch (error) {
         throw error;
     }
 };
+
 
 // Общий метод для выполнения PUT-запросов (обновление)
 const putReq = async (endpoint, data) => {

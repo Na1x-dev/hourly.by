@@ -7,21 +7,22 @@ import { getReq } from '../Api';
 
 const Header = () => {
   const { user, logout, isAuthenticated } = useAuth()
-  console.log(user)
   const navigate = useNavigate();
   const location = useLocation();
-  const accessToken = '';
 
   const showUser = async () => {
-    const response = await getReq('users/' + user.user_id, {
-      headers: {
-        Authorization: localStorage.getItem('accessToken', accessToken),
-      }
-    });
-    console.log(response)
-   }
+    try {
+      const response = await getReq(`users/${user.user_id}/`, { // Используем шаблонные строки
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Добавляем "Bearer" перед токеном, если это требуется
+        },
+      });
+      document.querySelector('.header-user-name').textContent = response;
+    } catch (error) {
+      console.error('Ошибка при получении пользователя:', error);
+    }
+  };
 
-   showUser()
 
   const handleScroll = () => {
     const header = document.querySelector('.header');
@@ -33,11 +34,12 @@ const Header = () => {
   };
 
   useEffect(() => {
+    showUser();
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [user, isAuthenticated]);
 
   const logoutFunction = () => {
     logout()

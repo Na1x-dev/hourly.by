@@ -26,7 +26,26 @@ SECRET_KEY = 'django-insecure-9fyvxf4j@@l8qlpp45c0@-v9vw8(&9fml#&&gh61%^s#@m=0a3
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = DEBUG
+CORS_ALLOW_ALL_ORIGINS = True
+   
+
+# CORS_ORIGIN_ALLOW_ALL = DEBUG
+
+
+
+# CORS_ALLOW_METHODS = [
+#     "GET",
+#     "POST",
+#     "PUT",
+#     "DELETE",
+#     "OPTIONS"
+# ]
+
+# CORS_ALLOW_HEADERS = [
+#     "content-type",
+#     "authorization"
+# ]
+
 
 # Application definition
 
@@ -46,6 +65,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,8 +73,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
+
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+# ]
 
 ROOT_URLCONF = 'hourly.urls'
 
