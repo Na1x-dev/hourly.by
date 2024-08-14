@@ -12,12 +12,15 @@ const Header = () => {
 
   const showUser = async () => {
     try {
-      const response = await getReq(`users/${user.user_id}/`, { 
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`, 
-        },
-      });
-      document.querySelector('.header-user-name').textContent = response;
+      if (user!= null) {
+        const response = await getReq(`users/${user.user_id}/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
+        if (response.first_name != "" && response.last_name != "" && response.patronymic != "")
+          document.querySelector('.header-user-name').textContent = response.last_name + " " + response.first_name[0] + ". " + response.patronymic[0] + ".";
+      }
     } catch (error) {
       console.error('Ошибка при получении пользователя:', error);
     }
