@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../style/SearchStyles.css';
 import CityDropdown from "../jsx/CityDropdown";
 import axios from "axios";
+import BookingCalendar from "./BookingCalender";
 
 
 const ApartmentSearchForm = ({ onSearch }) => {
@@ -13,6 +14,13 @@ const ApartmentSearchForm = ({ onSearch }) => {
         children: 0,
         petsAllowed: false
     });
+    const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+
+    const handleDateChange = (dates) => {
+      setDateRange(dates);
+    };
+  
+
 
     const handlePetsAllowedChange = (e) => {
         setSearchData({ ...searchData, petsAllowed: e.target.checked });
@@ -21,9 +29,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
     const handleSubmit = (event) => {
         event.preventDefault();// Соберите ваши данные поиска из формы
         onSearch(searchData); // Вызовите метод поиска с данными
-        
-        setTimeout(()=>document.getElementById('apartment-list').scrollIntoView({ behavior: 'smooth' }), 100)
-        
+        setTimeout(() => document.getElementById('apartment-list').scrollIntoView({ behavior: 'smooth' }), 100)
     };
 
 
@@ -53,7 +59,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
                     {/* {showCityDropdown&&<CityDropdown ></CityDropdown>} */}
                     <CityDropdown data={searchData}></CityDropdown>
                 </div>
-                <div className="input-box">
+                {/* <div className="input-box">
                     <label className="font label">Check-in Date</label>
                     <input
                         // required 
@@ -72,7 +78,13 @@ const ApartmentSearchForm = ({ onSearch }) => {
                         onChange={(e) => setSearchData({ ...searchData, checkOutDate: e.target.value })}
                         type="date"
                     />
+                </div> */}
+
+                <div className="input-box">
+                <label className="font label">Check-in-out Date</label>
+                <BookingCalendar />
                 </div>
+
                 <div className="input-box">
                     <label className="font label">Adults</label>
                     <input
