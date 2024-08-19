@@ -1,0 +1,1 @@
+sudo docker-compose run db_filler python main.py
