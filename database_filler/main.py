@@ -10,7 +10,8 @@ def create_connect():
         dbname="hourly",
         user="postgres",
         password="1234",
-        host="db",
+        # host="db",
+        host="127.0.0.1",
         port="5432"
     )
     return conn
