@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,11 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
-   
 
 # CORS_ORIGIN_ALLOW_ALL = DEBUG
-
-
 
 # CORS_ALLOW_METHODS = [
 #     "GET",
@@ -45,7 +42,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "content-type",
 #     "authorization"
 # ]
-
 
 # Application definition
 
@@ -74,7 +70,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:3000",
@@ -119,8 +114,22 @@ DATABASES = {
         # 'HOST': 'db',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+    },
+    'docker_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hourly',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'db',
+        # 'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
+
+USE_DOCKER_DB = os.getenv('USE_DOCKER_DB', 'False') == 'True'
+
+if USE_DOCKER_DB:
+    DATABASES['default'] = DATABASES['docker_db']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

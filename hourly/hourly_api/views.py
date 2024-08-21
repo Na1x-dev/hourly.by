@@ -33,7 +33,6 @@ class ApartmentSearchView(generics.ListAPIView):
         else:
             city = serializer.data.get('destination')
             queryset = Apartment.objects.filter(city=city)
-            print(queryset)
             return Response(self.get_serializer(queryset, many=True).data)
             # return Response(serializer.errors, status=400)
         
