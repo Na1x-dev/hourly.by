@@ -5,6 +5,7 @@ import axios from "axios";
 import BookingCalendar from "./BookingCalender";
 
 
+
 const ApartmentSearchForm = ({ onSearch }) => {
     const [searchData, setSearchData] = useState({
         destination: "",
@@ -14,12 +15,19 @@ const ApartmentSearchForm = ({ onSearch }) => {
         children: 0,
         petsAllowed: false
     });
-    const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+    const [dateRange, setDateRange] = useState([null, null]);
 
     const handleDateChange = (dates) => {
-      setDateRange(dates);
+        setDateRange(dates);
+        if(dates[0] && dates[1]){
+            setSearchData({
+                ...searchData, 
+                checkInDate: dates[0].toISOString().split('T')[0],
+                checkOutDate: dates[1].toISOString().split('T')[0]
+            })
+        }
     };
-  
+
 
 
     const handlePetsAllowedChange = (e) => {
@@ -28,6 +36,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();// Соберите ваши данные поиска из формы
+        //check data field
         onSearch(searchData); // Вызовите метод поиска с данными
         setTimeout(() => document.getElementById('apartment-list').scrollIntoView({ behavior: 'smooth' }), 100)
     };
@@ -59,30 +68,10 @@ const ApartmentSearchForm = ({ onSearch }) => {
                     {/* {showCityDropdown&&<CityDropdown ></CityDropdown>} */}
                     <CityDropdown data={searchData}></CityDropdown>
                 </div>
-                {/* <div className="input-box">
-                    <label className="font label">Check-in Date</label>
-                    <input
-                        // required 
-                        className="input font check-in-date-input"
-                        value={searchData.checkInDate}
-                        onChange={(e) => setSearchData({ ...searchData, checkInDate: e.target.value })}
-                        type="date"
-                    />
-                </div>
+           
                 <div className="input-box">
-                    <label className="font label">Check-out Date</label>
-                    <input
-                        // required
-                        className="input font check-out-date-input"
-                        value={searchData.checkOutDate}
-                        onChange={(e) => setSearchData({ ...searchData, checkOutDate: e.target.value })}
-                        type="date"
-                    />
-                </div> */}
-
-                <div className="input-box">
-                <label className="font label">Check-in-out Date</label>
-                <BookingCalendar />
+                    <label className="font label">Check-in-out Date</label>
+                    <BookingCalendar />
                 </div>
 
                 <div className="input-box">

@@ -25,6 +25,7 @@ class ApartmentSearchView(generics.ListAPIView):
 
     def post(self, request):
         serializer = ApartmentSearchSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             city = serializer.data.get('destination')
             queryset = Apartment.objects.filter(city=city)

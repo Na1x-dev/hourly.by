@@ -19,11 +19,11 @@ const BookingCalendar = ({ onSearch }) => {
 
   return (
     <div className="booking-calendar">
-      <div className="input-field-div" onClick={toggleCalendar}>
-        dateRange[0].toLocaleDateString() - dateRange[1].toLocaleDateString()
+      <div className="input font" onClick={toggleCalendar}>
+        {dateRange[0].toLocaleDateString()} - {dateRange[1].toLocaleDateString()}
       </div>
       {isCalendarOpen && (
-        <div className="calendar-container">
+        <div className="calendar-container font">
           <Calendar
             selectRange={true}
             onChange={handleDateChange}
