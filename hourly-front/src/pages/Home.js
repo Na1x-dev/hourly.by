@@ -13,6 +13,7 @@ const Home = () => {
   const handleSearch = async (searchData) => {
     try {
       const response = await postReq('/search', searchData);
+      console.log(searchData)
       setApartments(response);
     } catch (error) {
       console.error(error);

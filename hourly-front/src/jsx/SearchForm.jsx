@@ -15,7 +15,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
         children: 0,
         petsAllowed: false
     });
-    const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
     const handleDateChange = (dates) => {
         setDateRange(dates);
@@ -36,7 +36,9 @@ const ApartmentSearchForm = ({ onSearch }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();// Соберите ваши данные поиска из формы
+        
         //check data field
+
         onSearch(searchData); // Вызовите метод поиска с данными
         setTimeout(() => document.getElementById('apartment-list').scrollIntoView({ behavior: 'smooth' }), 100)
     };
@@ -71,7 +73,11 @@ const ApartmentSearchForm = ({ onSearch }) => {
            
                 <div className="input-box">
                     <label className="font label">Check-in-out Date</label>
-                    <BookingCalendar />
+                    <BookingCalendar 
+                        dateRange={dateRange}
+                        setDateRange={handleDateChange}
+
+                    />
                 </div>
 
                 <div className="input-box">

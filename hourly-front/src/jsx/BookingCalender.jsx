@@ -3,9 +3,12 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../style/SearchStyles.css'
 
-const BookingCalendar = ({ onSearch }) => {
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+const BookingCalendar = ({ dateRange, setDateRange }) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const titleDisabled = ({ date }) => {
+    return date < new Date();
+  }
 
   const handleDateChange = (dates) => {
     setDateRange(dates);
@@ -25,6 +28,7 @@ const BookingCalendar = ({ onSearch }) => {
       {isCalendarOpen && (
         <div className="calendar-container font">
           <Calendar
+            tileDisabled={titleDisabled}
             selectRange={true}
             onChange={handleDateChange}
             value={dateRange}
