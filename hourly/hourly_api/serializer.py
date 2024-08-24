@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Apartment,CustomUser
+from .models import Apartment,CustomUser, Booking
 
 
 class ApartmentSerializer(serializers.ModelSerializer):
@@ -16,8 +16,8 @@ class CitySerializer(serializers.ModelSerializer):
 
 class ApartmentSearchSerializer(serializers.Serializer):
     destination = serializers.CharField()
-    checkInDate = serializers.DateField()
-    checkOutDate = serializers.DateField()
+    start_date = serializers.DateField()
+    end_date = serializers.DateField()
     adults = serializers.IntegerField()
     children = serializers.IntegerField()
     petsAllowed = serializers.BooleanField()
@@ -38,10 +38,24 @@ class CustomUserCreateSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        print(validated_data)
         user = CustomUser(**validated_data)
         user.set_password(validated_data['password'])  # Хешируем пароль
         user.save()
         
         return user
         
+        
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
+        fields = ['id','start_date', 'end_date', 'apartment_id', 'user_id']
+        read_only_fields = ['user_id']
+        
+    def validate(self, data):
+        if data['start_date'] >= data['end_date']:
+            raise serializers.ValidationError('End date must be later than start date')
+        return data
+    
+    def create(self, validated_data):
+        return super().create(validated_data)
+    

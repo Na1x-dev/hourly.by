@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from test.support.threading_helper import start_threads
 
 
 class Apartment(models.Model):  # card-content
@@ -16,6 +17,11 @@ class Apartment(models.Model):  # card-content
     def __str__(self):
         return f"{self.title} - {self.price_per_day} - {self.location} - {self.rating}"
 
+    def is_available(self, start_date, end_date):
+        bookings = Booking.objects.filter(apartment = self, start_date__lt = end_date, end_date__gt = start_date)
+        return not bookings.exists()
+        
+        
 
 class CustomUserManager(BaseUserManager):
 
@@ -62,3 +68,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+
+class Booking(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    
+    def __str__(self):
+        return f'Booking by {self.user.last_name} {self.user.first_name} {self.user.patronymic} for {self.apartment.title}'

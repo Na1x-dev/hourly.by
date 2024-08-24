@@ -4,10 +4,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 
-from .models import Apartment, CustomUser
+from .models import Apartment, CustomUser, Booking
 # from .permissions import AllForAdminOtherReadOnlyPermission
-from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer, CustomUserCreateSerializer
+from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer, CustomUserCreateSerializer, BookingSerializer
 
 
 class ApartmentViewSet(viewsets.ModelViewSet):
@@ -28,8 +29,12 @@ class ApartmentSearchView(generics.ListAPIView):
         print(request.data)
         if serializer.is_valid():
             city = serializer.data.get('destination')
+            start_date = serializer.data.get('start_date')
+            end_date = serializer.data.get('end_date')
             queryset = Apartment.objects.filter(city=city)
-            return Response(self.get_serializer(queryset, many=True).data)
+            print(start_date)
+            available_apartments = [apartment for apartment in queryset if apartment.is_available(start_date, end_date)]
+            return Response(self.get_serializer(available_apartments, many=True).data)
         
         else:
             city = serializer.data.get('destination')
@@ -90,3 +95,32 @@ class UserProfileAPIView(APIView):
         except CustomUser.DoesNotExist:
             return Response({'detail': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
     
+    
+class BookingView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        apartment_id = request.data.get('apartment_id')
+        start_date = request.data.get('start_date')
+        end_date = request.data.get('end_date')
+        
+        try:
+            apartment = Apartment.objects.get(id=apartment_id)
+        except Apartment.DoesNotExist:
+            Response({'error':'Apartment not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        if not apartment.is_available(start_date, end_date):
+            return Response({'error':'Apartment is not available for the selected dates'}, status=status.HTTP_400_BAD_REQUEST)
+         
+        booking_data = {
+            'apartment':apartment.id,
+            'start_date':start_date,
+            'end_date':end_date,
+            'user':request.user.id
+        }
+        
+        serializer = BookingSerializer(data=booking_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
