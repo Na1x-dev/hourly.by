@@ -3,8 +3,9 @@ import axios from 'axios';
 const apiClient = axios.create({
     baseURL: 'http://localhost:8000/api', // базовый URL вашего API
     headers: {
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`, // Передача токена авторизации
         'Content-Type': 'application/json',
-    },
+    }
 });
 
 // Общий метод для выполнения POST-запросов

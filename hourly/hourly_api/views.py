@@ -8,8 +8,7 @@ from rest_framework.decorators import api_view
 
 from .models import Apartment, CustomUser, Booking
 # from .permissions import AllForAdminOtherReadOnlyPermission
-from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer, CustomUserCreateSerializer, BookingSerializer
-
+from .serializer import ApartmentSerializer, CitySerializer, ApartmentSearchSerializer, CustomUserSerializer, CustomUserCreateSerializer
 
 class ApartmentViewSet(viewsets.ModelViewSet):
     queryset = Apartment.objects.all()
@@ -98,11 +97,12 @@ class UserProfileAPIView(APIView):
     
 class BookingView(APIView):
     permission_classes = [IsAuthenticated]
+
     def post(self, request):
         apartment_id = request.data.get('apartment_id')
         start_date = request.data.get('start_date')
         end_date = request.data.get('end_date')
-        
+
         try:
             apartment = Apartment.objects.get(id=apartment_id)
         except Apartment.DoesNotExist:
@@ -110,17 +110,12 @@ class BookingView(APIView):
         
         if not apartment.is_available(start_date, end_date):
             return Response({'error':'Apartment is not available for the selected dates'}, status=status.HTTP_400_BAD_REQUEST)
-         
-        booking_data = {
-            'apartment':apartment.id,
-            'start_date':start_date,
-            'end_date':end_date,
-            'user':request.user.id
-        }
         
-        serializer = BookingSerializer(data=booking_data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        booking = Booking.objects.create(
+            apartment_id=apartment.id,
+            start_date=start_date,
+            end_date=end_date,
+            user_id=request.user.id,
+        )
+        
+        return Response({'id': booking.id}, status=status.HTTP_201_CREATED)

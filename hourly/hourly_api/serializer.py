@@ -45,17 +45,3 @@ class CustomUserCreateSerializer(serializers.ModelSerializer):
         return user
         
         
-class BookingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Booking
-        fields = ['id','start_date', 'end_date', 'apartment_id', 'user_id']
-        read_only_fields = ['user_id']
-        
-    def validate(self, data):
-        if data['start_date'] >= data['end_date']:
-            raise serializers.ValidationError('End date must be later than start date')
-        return data
-    
-    def create(self, validated_data):
-        return super().create(validated_data)
-    

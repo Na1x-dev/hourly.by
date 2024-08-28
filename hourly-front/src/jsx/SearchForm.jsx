@@ -6,7 +6,7 @@ import BookingCalendar from "./BookingCalender";
 
 
 
-const ApartmentSearchForm = ({ onSearch }) => {
+const ApartmentSearchForm = ({ onSearch, dateRange, setDateRange }) => {
     const [searchData, setSearchData] = useState({
         destination: "",
         checkInDate: "",
@@ -15,8 +15,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
         children: 0,
         petsAllowed: false
     });
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
-
+  
     const handleDateChange = (dates) => {
         setDateRange(dates);
         if(dates[0] && dates[1]){
@@ -26,6 +25,7 @@ const ApartmentSearchForm = ({ onSearch }) => {
                 checkOutDate: dates[1].toISOString().split('T')[0]
             })
         }
+        console.log(searchData)
     };
 
 

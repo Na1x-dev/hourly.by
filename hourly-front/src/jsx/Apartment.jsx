@@ -1,5 +1,30 @@
-const Apartment = (apartment) => {
+import { postReq } from '../Api';
 
+const Apartment = (apartment) => {
+    const handleBooking = async () => {
+      
+        // if (!token) {
+        //     alert('Вы должны войти в систему, чтобы забронировать эту квартиру.');
+        //     navigate('/login'); // Перенаправление на страницу логина
+        //     return;
+        // }
+
+        
+
+        try {
+            console.log(apartment.apartment,)
+            const response = await postReq('/bookings/', {
+                apartment_id: apartment.apartment.id,
+                start_date: apartment.dateRange[0].toISOString().slice(0, 10),
+                end_date: apartment.dateRange[1].toISOString().slice(0, 10), 
+            });
+
+            console.log('Бронирование успешно:', response.data);
+            alert('Ваше бронирование успешно создано!');
+          } catch (error) {
+            console.error('Ошибка при создании бронирования:', error);
+        }
+    };
 
     return (
         <div className='apartment-card'>
@@ -19,7 +44,7 @@ const Apartment = (apartment) => {
                 <p className="apartment-card-text apartment-rating">{apartment.apartment.rating}/10</p>
                 <p className="apartment-card-text apartment-size">{apartment.apartment.size}</p>
             </div>
-            <button className="btn btn-primary see-card-button">See</button>
+            <button className="btn btn-primary see-card-button" onClick={handleBooking}>See</button>
         </div>
 
     );
