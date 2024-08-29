@@ -1,0 +1,68 @@
+.Toastify__toast-container {
+    position: fixed;
+    /* Изменяем на absolute */
+    bottom: 20px;
+    /* Установите нужное значение */
+    right: 20px;
+    /* Установите нужное значение */
+    z-index: 9999;
+    /* Убедитесь, что уведомления отображаются поверх других элементов */
+
+}
+
+.Toastify__toast {
+    opacity: 0; /* Начальная прозрачность */
+    transform: translateX(100%); /* Начальное положение */
+    animation: showToast 0.5s forwards;
+}
+
+.Toastify__toast-body {
+    /* background-color: #333; 
+    color: white;  */
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    color: #555;
+    gap: 20px;
+    font-size: 16px;
+    transition-duration: 0.5s;
+    opacity: 0.9;
+}
+
+.Toastify__toast-icon {
+    width: 50px;
+    fill: rgb(255, 51, 119);
+}
+
+.Toastify__close-button {
+    display: none;
+}
+
+@keyframes showToast {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Для автоматического скрытия через 3 секунды */
+.toast-container:hover .toast {
+    animation: hideToast 0.5s forwards; /* Запуск анимации скрытия при наведении */
+}
+
+@keyframes hideToast {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
