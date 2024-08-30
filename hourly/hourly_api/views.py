@@ -25,21 +25,18 @@ class ApartmentSearchView(generics.ListAPIView):
 
     def post(self, request):
         serializer = ApartmentSearchSerializer(data=request.data)
-        print(request.data)
-        if serializer.is_valid():
-            city = serializer.data.get('destination')
-            start_date = serializer.data.get('start_date')
-            end_date = serializer.data.get('end_date')
-            queryset = Apartment.objects.filter(city=city)
-            print(start_date)
-            available_apartments = [apartment for apartment in queryset if apartment.is_available(start_date, end_date)]
-            return Response(self.get_serializer(available_apartments, many=True).data)
         
-        else:
+        if serializer.is_valid():
+            print(request.data)
             city = serializer.data.get('destination')
+            start_date = serializer.data.get('checkInDate')
+            end_date = serializer.data.get('checkOutDate')
             queryset = Apartment.objects.filter(city=city)
-            return Response(self.get_serializer(queryset, many=True).data)
-            # return Response(serializer.errors, status=400)
+            available_apartments = [apartment for apartment in queryset if apartment.is_available(start_date, end_date)]            
+            return Response(self.get_serializer(available_apartments, many=True).data)
+            
+        else:
+            return Response(serializer.errors, status=400)
         
         # if serializer.is_valid():
             # Выполните здесь необходимую обработку данных

@@ -16,8 +16,8 @@ class CitySerializer(serializers.ModelSerializer):
 
 class ApartmentSearchSerializer(serializers.Serializer):
     destination = serializers.CharField()
-    start_date = serializers.DateField()
-    end_date = serializers.DateField()
+    checkInDate = serializers.DateField()
+    checkOutDate = serializers.DateField()
     adults = serializers.IntegerField()
     children = serializers.IntegerField()
     petsAllowed = serializers.BooleanField()
