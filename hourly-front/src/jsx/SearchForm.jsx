@@ -25,7 +25,6 @@ const ApartmentSearchForm = ({ onSearch, dateRange, setDateRange }) => {
                 checkOutDate: dates[1].toISOString().split('T')[0]
             })
         }
-        console.log(searchData)
     };
 
 

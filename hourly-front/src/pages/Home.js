@@ -6,10 +6,22 @@ import ApartmentList from '../jsx/ApartmentList';
 import axios from 'axios';
 import {  useAuth } from '../jsx/AuthContext'; 
 import { getReq, postReq } from '../Api';
+import { SnackbarProvider } from 'notistack';
 
 const Home = () => {
   const [apartments, setApartments] = useState([]);
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  
+  const initDatePicker = () =>{
+    const tomorrow = new Date();
+    const afterTomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    afterTomorrow.setDate(tomorrow.getDate()+1);
+    return [tomorrow, afterTomorrow];
+  }
+  
+  const [dateRange, setDateRange] = useState(initDatePicker);
+
+  
 
   const handleSearch = async (searchData) => {
     try {
@@ -24,10 +36,12 @@ const Home = () => {
 
   return (
     <div className='app'>
+      <SnackbarProvider maxSnack={3}>
       <Header />
       <ApartmentSearchForm dateRange={dateRange} setDateRange={setDateRange} onSearch={handleSearch} />
       <ApartmentList dateRange={dateRange} setDateRange={setDateRange} apartments={apartments} />
       <Footer />
+      </SnackbarProvider>
     </div>
   );
 };
